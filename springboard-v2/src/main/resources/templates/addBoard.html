@@ -1,0 +1,108 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+	<style type="text/css">
+		#jb-container {
+	        width: 940px;
+	        margin: 0px auto;
+	        padding: 20px;
+	        border: 1px solid #bcbcbc;
+	      }
+	      #jb-content {
+	        width: 900px;
+	        padding: 80px;
+	        margin: 0 auto;
+	        margin-bottom: 80px;
+	        float: center;
+	        border: 1px solid #bcbcbc;
+	      }
+	</style>
+	<meta charset="UTF-8">
+	<title>Insert Form</title>
+	<script type="text/javascript">
+		function validate() {
+			var re = /^[a-zA-Z0-9]{4,12}$/
+			var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			
+			var boardUser = document.getElementById("boardUser");
+			var boardPw = document.getElementById("boardPw");
+			var boardTitle = document.getElementById("boardTitle");
+			var boardContent = document.getElementById("boardContent");
+			
+			if(!check(re,boardUser,"User Name은 영문 대소문자와 숫자로만 입력해주세요.")) {
+				
+				return false;
+		        }
+	
+		    if(!check(re,boardPw,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력해주세요.")) {
+		    	
+		    	return false;
+		    	}
+	
+		    if(join.boardPw.value != join.boardPwCheck.value) {
+		    	alert("비밀번호가 다릅니다. 다시 확인해주세요.");
+		    	join.boardPwCheck.value = "";
+		    	join.boardPwCheck.focus();
+	            
+		    	return false;
+		    	}
+		    
+		    if(boardTitle.value=="") {
+		    	alert("제목을 입력해주세요");
+		    	boardTitle.focus();
+		    	
+		    	return false;
+		    	}
+		    
+		    if(boardContent.value=="") {
+		    	alert("내용을 입력해주세요");
+		    	boardContent.focus();
+		    	
+		    	return false;
+		    	}
+		    
+		    alert("회원가입이 완료되었습니다.")
+		}
+		
+		function check(re, what, message) {
+			if(re.test(what.value)) {
+			    return true;
+			}
+			alert(message);
+			what.value = "";
+			what.focus();
+			//return false;
+		}
+	</script>
+
+	</head>
+	<body>
+			<Form id="jb-content" action="/addBoard" method="post">
+				<fieldset>
+				<div class="form-group" style="text-align:center">
+					<h2><label>Password</label></h2>
+					<input class="form-control" type="password" name="boardPw" id="Password" placeholder="비밀번호를 정확하게 입력해주세요." style="text-align:center">
+				</div> <br><br>
+				<div class="form-group" style="text-align:center">
+					<h2><label>Password Check</label></h2>
+					<input class="form-control" type="password" name="boardPwCheck" id="Password" placeholder="비밀번호를 정확하게 입력해주세요." style="text-align:center">
+				</div> <br><br>
+				<div class="form-group" style="text-align:center">
+					<h2><label>Title</label></h2>
+					<input class="form-control" type="text" name="boardTitle" id="Title" placeholder="제목을 입력해주세요." style="text-align:center">
+				</div> <br><br>
+				<div class="form-group" style="text-align:center">
+					<h2><label>Content</label></h2>
+					<textarea class="form-control" cols="150" name="boardContent" id="Content" placeholder="내용을 입력해주세요." style="text-align:center"></textarea>
+				</div> <br><br>
+				<div class="form-group" style="text-align:center">
+					<h2><label>User Name</label ></h2>
+					<input class="form-control" type="text" name="boardUser" id="User" placeholder="이름을 입력해주세요." style="text-align:center"> <br><br>
+				</div> <br><br>
+				<div style="text-align:center">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+				</fieldset>
+			</Form>
+	</body>
+</html>
